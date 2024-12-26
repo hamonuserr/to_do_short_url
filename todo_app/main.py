@@ -6,22 +6,22 @@ from sqlalchemy.orm import Session
 
 from database import SessionLocal, engine, Base
 from models import TodoItem as TodoItemModel
-from authx import AuthX, AuthXConfig
+# from authx import AuthX, AuthXConfig
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-config = AuthXConfig()
-config.JWT_SECRET_KEY = "SECRET KEY"
-config.JWT_ACCESS_COOKIE_NAME = "access_token"
-config.JWT_TOKEN_LOCATION = ["cookies"]
-
-working_config = AuthX(config=config)
-
-class UserLogin(BaseModel):
-    username: str
-    password: str
+# config = AuthXConfig()
+# config.JWT_SECRET_KEY = "SECRET KEY"
+# config.JWT_ACCESS_COOKIE_NAME = "access_token"
+# config.JWT_TOKEN_LOCATION = ["cookies"]
+#
+# working_config = AuthX(config=config)
+#
+# class UserLogin(BaseModel):
+#     username: str
+#     password: str
 
 
 class TodoCreate(BaseModel):
@@ -56,23 +56,23 @@ def get_db():
         db.close()
 
 
-@app.post("/login")
-def login(credentials: Annotated[UserLogin, Depends()], response: Response):
-    if credentials.username == "admin" and credentials.password == "admin":
-        token = working_config.create_access_token(uid = "1337")
-        response.set_cookie(config.JWT_ACCESS_COOKIE_NAME, token)
-        return {"access_token": token}
-    raise HTTPException(status_code=401, detail="Incorrect username or password")
+# @app.post("/login")
+# def login(credentials: Annotated[UserLogin, Depends()], response: Response):
+#     if credentials.username == "admin" and credentials.password == "admin":
+#         token = working_config.create_access_token(uid = "1337")
+#         response.set_cookie(config.JWT_ACCESS_COOKIE_NAME, token)
+#         return {"access_token": token}
+#     raise HTTPException(status_code=401, detail="Incorrect username or password")
 
 
-@app.get("/items", response_model=List[TodoItem], dependencies = [Depends(working_config.access_token_required)])
+@app.get("/items", response_model=List[TodoItem])
 def get_items(db: Session = Depends(get_db), title: Union[str, None] = None):
     items = db.query(TodoItemModel).all() if title is None else db.query(TodoItemModel).filter(
         TodoItemModel.title == title)
     return items
 
 
-@app.get("/items/{item_id}", response_model=TodoItem, dependencies = [Depends(working_config.access_token_required)])
+@app.get("/items/{item_id}", response_model=TodoItem)
 def get_item(item_id: int, db: Session = Depends(get_db)):
     item = db.query(TodoItemModel).filter(TodoItemModel.id == item_id).first()
     if not item:
@@ -80,7 +80,7 @@ def get_item(item_id: int, db: Session = Depends(get_db)):
     return item
 
 
-@app.post("/items", response_model=TodoItem, dependencies = [Depends(working_config.access_token_required)])
+@app.post("/items", response_model=TodoItem)
 def create_item(item: TodoCreate, db: Session = Depends(get_db)):
     new_item = TodoItemModel(
         title=item.title,
@@ -93,7 +93,7 @@ def create_item(item: TodoCreate, db: Session = Depends(get_db)):
     return new_item
 
 
-@app.put("/items/{item_id}", response_model=TodoItem, dependencies = [Depends(working_config.access_token_required)])
+@app.put("/items/{item_id}", response_model=TodoItem)
 def update_item(item_id: int, item: TodoCreate, db: Session = Depends(get_db)):
     db_item = db.query(TodoItemModel).filter(TodoItemModel.id == item_id).first()
     if not db_item:
@@ -106,7 +106,7 @@ def update_item(item_id: int, item: TodoCreate, db: Session = Depends(get_db)):
     return db_item
 
 
-@app.delete("/items/{item_id}", dependencies = [Depends(working_config.access_token_required)])
+@app.delete("/items/{item_id}")
 def delete_item(item_id: int, db: Session = Depends(get_db)):
     db_item = db.query(TodoItemModel).filter(TodoItemModel.id == item_id).first()
     if not db_item:
