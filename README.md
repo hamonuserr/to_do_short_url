@@ -24,16 +24,23 @@ docker build -t hamonuserr .
 
 Запускаем контейнер:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr:latest
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo:latest
 ```
 
-выполняем команды для запуска:
-```bash
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr:latest
-```
 or
 
 ```bash
-docker run -d -p 8000:80 -v shorturl_data:/app/data hamonuserr/shorturl-service
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/url:latest
+```
+
+Выполняем команды для запуска:
+```bash
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo
+```
+
+or
+
+```bash
+docker run -d -p 8000:80 -v shorturl_data:/app/data hamonuserr/url
 ```
 
