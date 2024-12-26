@@ -24,7 +24,7 @@ docker build -t hamonuserr/backend .
 
 Запускаем контейнер:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data username/backend:latest
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/backend:latest
 ```
 
 выполняем команды для запуска:
