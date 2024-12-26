@@ -23,9 +23,9 @@ docker build -t hamonuserr/todo .
 docker build -t hamonuserr/url .
 ```
 
-Запускаем контейнер:
+Запускаем контейнеры:
 ```bash
 docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo
 
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/url
+docker run -d -p 8000:79 -v todo_data:/app/data hamonuserr/url
 ```
