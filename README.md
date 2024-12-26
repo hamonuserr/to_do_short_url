@@ -27,13 +27,11 @@ docker build -t hamonuserr/backend .
 docker run -d -p 8000:80 -v todo_data:/app/data username/backend:latest
 ```
 
-## Команды для запуска 2<a id=2></a>
-
-Выполнить команды в терминале:
+выполняем команды для запуска:
 ```bash
 docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo-service:latest
 ```
-
+or
 
 ```bash
 docker run -d -p 8000:80 -v shorturl_data:/app/data hamonuserr/shorturl-service
