@@ -31,11 +31,11 @@ docker run -d -p 8000:80 -v todo_data:/app/data username/backend:latest
 
 Выполнить команды в терминале:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data denmais/todo-service:latest
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo-service:latest
 ```
 
 
 ```bash
-docker run -d -p 8000:80 -v shorturl_data:/app/data denmais/shorturl-service
+docker run -d -p 8000:80 -v shorturl_data:/app/data hamonuserr/shorturl-service
 ```
 
