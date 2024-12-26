@@ -29,5 +29,3 @@ docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo
 
 docker run -d -p 25566:80 -v todo_data:/app/data hamonuserr/url
 ```
-P.S.
-Не забываем залогиниться, чтобы работали все ручки в to_do_app: (login = 'admin', password = 'admin')
