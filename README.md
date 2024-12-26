@@ -19,17 +19,17 @@ pip install -r requirements.txt
 
 Собираем образы:
 ```bash
-docker build -t hamonuserr/backend .
+docker build -t hamonuserr .
 ```
 
 Запускаем контейнер:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/backend:latest
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr:latest
 ```
 
 выполняем команды для запуска:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo-service:latest
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr:latest
 ```
 or
 
