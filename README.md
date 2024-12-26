@@ -1,5 +1,4 @@
-## Final project
-
+# Final project
 ## How to start👻
 
 Клонируем проект: 
@@ -19,20 +18,14 @@ pip install -r requirements.txt
 
 Собираем образы:
 ```bash
-docker build -t hamonuserr .
+docker build -t hamonuserr/todo .
+
+docker build -t hamonuserr/url .
 ```
 
 Запускаем контейнер:
 ```bash
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo:latest
-
-docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/url:latest
-```
-
-Выполняем команды для запуска:
-```bash
 docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/todo
 
-docker run -d -p 8000:80 -v shorturl_data:/app/data hamonuserr/url
+docker run -d -p 8000:80 -v todo_data:/app/data hamonuserr/url
 ```
-
